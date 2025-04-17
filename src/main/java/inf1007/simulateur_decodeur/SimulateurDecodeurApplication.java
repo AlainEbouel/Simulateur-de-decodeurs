@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SimulateurDecodeurApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(SimulateurDecodeurApplication.class, args);
     }
 
