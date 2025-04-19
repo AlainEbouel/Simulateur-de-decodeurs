@@ -22,8 +22,6 @@ public class DecoderService {
     }
 
     public List<Decoder> getDecodersForCurrentClient(String username) {
-//        User user = userRepository.findByUsername(username).orElseThrow();
-//        return decoderRepository.findByClient(user.getClient());
         User user = userRepository.findByUsername(username).orElseThrow();
         Long clientId = user.getClient().getId();
         return decoderRepository.findByClientId(clientId);
@@ -50,6 +48,12 @@ public class DecoderService {
         return decoderRepository.findByClient(client).stream()
                 .map(decoder -> new DecoderDTO(decoder.getId(), decoder.getIpAddress()))
                 .toList();
+    }
+    public Decoder save(Decoder decoder) {
+        return decoderRepository.save(decoder);
+    }
+    public List<Decoder> getAllDecoders() {
+        return decoderRepository.findAll();
     }
 
 }

@@ -10,5 +10,6 @@ public interface DecoderRepository extends JpaRepository<Decoder, Long> {
     List<Decoder> findByClient(Client client);
     List<Decoder> findByClientId(Long clientId);
     boolean existsByIpAddress(String ipAddress);
+    List<Decoder> findByClientIsNull();
 
 }

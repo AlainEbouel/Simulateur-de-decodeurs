@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -48,5 +49,44 @@ public class DecoderActionService {
 
     public String shutdown(String ipAddress) {
         return performAction(ipAddress, "shutdown");
+    }
+    public String addChannel(String ipAddress, Long channelId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("id", CODE_PERMANENT);
+        body.put("address", ipAddress);
+        body.put("action", "add-channel");
+        body.put("channelId", channelId);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(API_URL, request, String.class);
+        return response.getBody();
+    }
+
+
+    public String removeChannel(String ipAddress, Long channelId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("id", CODE_PERMANENT);
+        body.put("address", ipAddress);
+        body.put("action", "remove-channel");
+        body.put("channelId", channelId);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(API_URL, request, String.class);
+        return response.getBody();
+    }
+
+
+    public String getChannels(String ipAddress) {
+        return restTemplate.getForObject(API_URL  + "/" + ipAddress + "/channels", String.class);
     }
 }

@@ -13,6 +13,7 @@ public class User {
     private String role;
 
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     public Long getId() {
