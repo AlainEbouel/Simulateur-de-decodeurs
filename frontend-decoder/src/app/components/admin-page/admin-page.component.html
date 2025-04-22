@@ -1,0 +1,24 @@
+<div class="admin-container">
+  <h1 class="page-title">🛠️ Interface d'administration - Cablo-distribution</h1>
+
+  <mat-card class="admin-card">
+    <h2>👥 Liste des clients</h2>
+    <div *ngFor="let client of clients" class="client-card">
+      <h3>{{ client.name }}</h3>
+      <ul>
+        <li *ngFor="let decoder of client.decoders">
+          Décodeur #{{ decoder.id }} – {{ decoder.ipAddress }}
+        </li>
+      </ul>
+    </div>
+  </mat-card>
+
+  <mat-card class="admin-card">
+    <h2>📦 Décodeurs disponibles</h2>
+    <ul>
+      <li *ngFor="let decoderIp of availableDecoders">
+        {{ decoderIp }}
+      </li>
+    </ul>
+  </mat-card>
+</div>
