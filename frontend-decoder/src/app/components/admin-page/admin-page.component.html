@@ -1,24 +1,80 @@
 <div class="admin-container">
-  <h1 class="page-title">🛠️ Interface d'administration - Cablo-distribution</h1>
 
+  <!-- Titre + Déconnexion -->
+  <div class="admin-header">
+    <h1 class="page-title">🛠️ Interface d'administration - Cablo-distribution</h1>
+    <button mat-raised-button color="warn" class="logout-button" (click)="logout()">Déconnexion</button>
+  </div>
+
+  <!-- Clients + Création alignés -->
+  <div class="admin-flex-row">
+
+    <!-- Liste des clients -->
+    <mat-card class="admin-card admin-card-flex">
+      <mat-card-title>👥 Liste des clients</mat-card-title>
+      <mat-card-content>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let client of clients">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ client.name }}
+              </mat-panel-title>
+              <button mat-mini-button color="warn" (click)="deleteClient(client.id)" style="margin-left: auto;">
+                Supprimer
+              </button>
+            </mat-expansion-panel-header>
+
+            <ul>
+              <li *ngFor="let decoder of client.decoders">
+                🔌 Décodeur #{{ decoder.id }} – {{ decoder.ipAddress }}
+                <button mat-button color="warn" (click)="removeDecoder(decoder.id)">Retirer</button>
+              </li>
+            </ul>
+
+            <div *ngIf="availableDecoders.length > 0" class="assign-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Assigner un décodeur</mat-label>
+                <mat-select [(ngModel)]="selectedDecoderIp">
+                  <mat-option *ngFor="let ip of availableDecoders" [value]="ip">{{ ip }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)="assignDecoder(client.id)">Assigner</button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Formulaire de création de client -->
+    <mat-card class="admin-card admin-card-flex">
+      <mat-card-title>➕ Créer un nouveau client</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="createClient()" class="client-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom du client</mat-label>
+            <input matInput [(ngModel)]="newClient.name" name="name" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput [(ngModel)]="newClient.password" name="password" required type="password">
+          </mat-form-field>
+          <button mat-raised-button color="accent" type="submit">Créer</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <!-- Décodeurs disponibles -->
   <mat-card class="admin-card">
-    <h2>👥 Liste des clients</h2>
-    <div *ngFor="let client of clients" class="client-card">
-      <h3>{{ client.name }}</h3>
+    <mat-card-title>📦 Décodeurs disponibles</mat-card-title>
+    <mat-card-content>
       <ul>
-        <li *ngFor="let decoder of client.decoders">
-          Décodeur #{{ decoder.id }} – {{ decoder.ipAddress }}
+        <li *ngFor="let decoderIp of availableDecoders">
+          ✅ {{ decoderIp }}
         </li>
       </ul>
-    </div>
+    </mat-card-content>
   </mat-card>
 
-  <mat-card class="admin-card">
-    <h2>📦 Décodeurs disponibles</h2>
-    <ul>
-      <li *ngFor="let decoderIp of availableDecoders">
-        {{ decoderIp }}
-      </li>
-    </ul>
-  </mat-card>
 </div>

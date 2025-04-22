@@ -23,3 +23,15 @@
   background-color: #ffffffee;
   border-radius: 12px;
 }
+.logout-button {
+  background-color: #e53935;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #5839b5;
+}

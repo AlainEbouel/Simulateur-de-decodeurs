@@ -1,3 +1,17 @@
+.logout-button {
+  background-color: rgba(248, 34, 32, 0.65);
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+}
+
+.logout-button:hover {
+  background-color: #8e5353;
+}
+
 .admin-container {
   padding: 2rem;
   background: linear-gradient(to right, #f6d365, #fda085);
@@ -5,25 +19,123 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
 .page-title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
-  margin-bottom: 2rem;
-  text-align: center;
+  margin: 0;
   color: #2c3e50;
 }
 
 .admin-card {
   background-color: white;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #6a1b9a;
+  margin-bottom: 0.8rem;
+}
+
+mat-card-content {
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+mat-expansion-panel {
+  background-color: #f9f7fd;
+  border-left: 4px solid #7b1fa2;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+mat-expansion-panel-header {
+  font-weight: bold;
+  color: #4a148c;
+  padding: 0.5rem 1rem;
 }
 
 .client-card {
   background-color: #f0f8ff;
   border-left: 4px solid #2980b9;
   padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+li {
+  padding: 4px 0;
+  font-weight: 500;
+  color: #333;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+
+}
+
+button.assign-button, button.remove-button {
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.assign-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+button.assign-button:hover {
+  background-color: #388e3c;
+}
+
+button.remove-button {
+  background-color: #f44336;
+  color: white;
+}
+
+button.remove-button:hover {
+  background-color: #d32f2f;
+}
+.admin-flex-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.admin-card-flex {
+  flex: 1 1 45%;
+}
+
+.client-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.full-width {
+  width: 100%;
 }

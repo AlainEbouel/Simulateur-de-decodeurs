@@ -1,8 +1,58 @@
-.client-container {
-  background: linear-gradient(135deg, #00bcd4, #4caf50);
-  color: white;
-  padding: 60px;
+:host {
+  display: block;
+  background: linear-gradient(135deg,  #2d759f, #7eaf91);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
   text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: #ff4081;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px #0c0101;
+}
+
+mat-card {
+  margin: 1rem auto;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  color: #1976d2;
+  margin-bottom: 0.5rem;
+}
+
+mat-card-content {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+button {
+  flex: 1 1 auto;
+  min-width: 120px;
+  margin-top: 0.5rem;
+}
+
+button.mat-raised-button {
+  background-color: #ffcc80;
+  color: #000;
+}
+
+button.mat-raised-button:hover {
+  background-color: #ffb74d;
 }

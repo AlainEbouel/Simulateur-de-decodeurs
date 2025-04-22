@@ -1,4 +1,63 @@
-<div class="client-container">
-  <h1>📺 Espace Client – Cablo-distribution</h1>
-  <p>Bienvenue ! Voici la liste de vos décodeurs à gérer.</p>
+<div style="text-align: center; margin-top: 20px;">
+  <h1 style="color: #1976d2;">📺 Espace Client – Décodeurs</h1>
+  <h2 style="color: #4ce14c;"><span style="color: #15dc1f;">👤</span> Bienvenue, {{ clientName }}</h2>
+
+  <button mat-raised-button color="warn" (click)="logout()" style="position: absolute; top: 20px; right: 20px;">
+    Déconnexion
+  </button>
+
+  <div *ngIf="decoders.length === 0" style="margin-top: 40px; font-size: 18px; color: #bd1313;">
+    Aucun décodeur assigné pour ce compte.
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 30px;">
+    <mat-card *ngFor="let decoder of decoders" style="width: 350px; margin: 15px; background: #e3f2fd;"
+              [ngStyle]="{
+    backgroundColor: decoder.status?.state === 'active' ? '#e8f5e9' : '#fce4ec',
+    border: '2px solid',
+    borderColor: decoder.status?.state === 'active' ? '#66bb6a' : '#e57373'
+  }"
+              style="width: 350px; margin: 15px;"
+    >
+      <mat-card-header>
+        <mat-card-title>Décodeur #{{ decoder.id }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>IP</strong> : {{ decoder.ipAddress }}</p>
+        <p><strong>État</strong> : {{ decoder.status?.state || '...' }}</p>
+        <p><strong>Dernier redémarrage</strong> : {{ decoder.status?.lastRestart }}</p>
+        <p><strong>Dernière réinitialisation</strong> : {{ decoder.status?.lastReinit }}</p>
+
+        <p><strong>Chaînes :</strong></p>
+        <ul>
+          <li *ngFor="let ch of decoder.channels">
+            📺 {{ ch.name }}
+            <button mat-button color="warn" (click)="removeChannel(decoder.id, ch.id)">Retirer</button>
+          </li>
+        </ul>
+
+        <div style="display: flex; align-items: center; margin-top: 8px;">
+          <mat-form-field appearance="fill" style="flex: 1; margin: 0;">
+            <mat-label>Sélectionner une chaîne</mat-label>
+            <mat-select [(ngModel)]="selectedChannelId[decoder.id]">
+              <mat-option *ngFor="let channel of allChannels" [value]="channel.id">
+                {{ channel.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </div>
+        <button mat-raised-button color="primary" style="margin-bottom: 41px; margin-top: 1px; " (click)="addChannel(decoder.id)">
+          Ajouter la chaîne au décodeur
+        </button>
+
+        <div style="margin-top: 10px;">
+          <button mat-stroked-button color="accent" (click)="reboot(decoder.id)">🔁 Redémarrer</button>
+          <button mat-stroked-button color="warn" (click)="shutdown(decoder.id)">🛑 Éteindre</button>
+          <button mat-stroked-button color="accent" (click)="reinit(decoder.id)">🔧 Réinitialiser</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
